@@ -1,1 +1,162 @@
+using System;
+using System.DirectoryServices.AccountManagement;
+using System.Security.Principal;
+using System.Windows;
 
+namespace Change_Password
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void ExitTool_Click(object sender, RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        private void ResetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+            // find a user
+            string CurrentUser = WindowsIdentity.GetCurrent().Name;
+
+            UserPrincipal User = UserPrincipal.FindByIdentity(ctx, CurrentUser);
+            try
+            {
+                if (CurrentPassword != null)
+                {
+                    if (NewPassword != null)
+                    {
+                        if (VerifyPassword != null)
+                        {
+                            if (NewPassword.Password == VerifyPassword.Password)
+                            {
+                                User.ChangePassword(CurrentPassword.Password, NewPassword.Password);
+                                User.Save();
+                                MessageBox.Show("Password Changed");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Passwords does not match. Please try again.");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter the New Password again.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter the New Password.");
+                    }
+                }
+                else {
+                    MessageBox.Show("Please enter the Current Password");
+                }
+                
+            }
+            catch (PasswordException)
+            {
+                MessageBox.Show("Your new Password does not meet the requirements." + Environment.NewLine + "Please try again.");
+            }
+        }
+
+        private void imgDownShowVerify(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ShowVerify();
+        }
+
+        private void ShowVerify()
+        {
+            visibleVerifyPassword.Visibility = System.Windows.Visibility.Visible;
+            VerifyPassword.Visibility = System.Windows.Visibility.Hidden;
+            visibleVerifyPassword.Text = VerifyPassword.Password;
+        }
+
+        private void imgLeaveHideVerify(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideVerify();
+        }
+
+        private void imgUpHideVerify(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            HideVerify();
+        }
+
+        private void HideVerify()
+        {
+            VerifyPassword.Visibility = System.Windows.Visibility.Visible;
+            visibleVerifyPassword.Visibility = System.Windows.Visibility.Hidden;
+            VerifyPassword.Focus();
+        }
+
+        private void imgDownShowNew(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ShowNew();
+        }
+
+        private void ShowNew()
+        {
+            visibleNewPassword.Visibility = System.Windows.Visibility.Visible;
+            NewPassword.Visibility = System.Windows.Visibility.Hidden;
+            visibleNewPassword.Text = NewPassword.Password;
+        }
+
+        private void imgUpHideNew(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            HideNew();
+        }
+
+        
+
+        private void imgLeaveHideNew(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideNew();
+        }
+
+        private void HideNew()
+        {
+            NewPassword.Visibility = System.Windows.Visibility.Visible;
+            visibleNewPassword.Visibility = System.Windows.Visibility.Hidden;
+            NewPassword.Focus();
+        }
+
+
+        private void imgDownShowCurrent(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ShowCurrent();
+        }
+
+        private void ShowCurrent()
+        {
+            visibleCurrentPassword.Visibility = System.Windows.Visibility.Visible;
+            CurrentPassword.Visibility = System.Windows.Visibility.Hidden;
+            visibleCurrentPassword.Text = CurrentPassword.Password;
+        }
+
+        private void imgLeaveHideCurrent(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideCurrent();
+        }
+
+        
+
+        private void imgUpHideCurrent(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            HideCurrent();
+        }
+
+        private void HideCurrent()
+        {
+            CurrentPassword.Visibility = System.Windows.Visibility.Visible;
+            visibleCurrentPassword.Visibility = System.Windows.Visibility.Hidden;
+            CurrentPassword.Focus();
+        }
+    }
+}
