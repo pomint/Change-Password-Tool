@@ -1,0 +1,29 @@
+<Window x:Class="Change_Password.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Change_Password"
+        mc:Ignorable="d"
+        Title="Change Password" Height="350" Width="600">
+    <Grid>
+        <Label x:Name="Header1" Content="Enter Current Password Here" HorizontalAlignment="Left" Margin="29,27,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label x:Name="Passwordlabel" Content="Enter new Password here" HorizontalAlignment="Left" Margin="31,95,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label Content="Enter new Password again" HorizontalAlignment="Left" Margin="31,163
+               ,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="visibleCurrentPassword" HorizontalAlignment="Left" Height="20" Margin="31,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"/>
+        <TextBox x:Name="visibleNewPassword" HorizontalAlignment="Left" Height="20" Margin="31,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"/>
+        <TextBox x:Name="visibleVerifyPassword" HorizontalAlignment="Left" Height="20" Margin="31,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" />
+        <PasswordBox x:Name="CurrentPassword" HorizontalAlignment="Left" Height="20" Margin="31,58,0,0" VerticalAlignment="Top" Width="266"  />
+        <PasswordBox x:Name="NewPassword" HorizontalAlignment="Left" Margin="31,126,0,0" VerticalAlignment="Top" Width="266" Height="20" />
+        <PasswordBox x:Name="VerifyPassword" HorizontalAlignment="Left" Margin="31,194,0,0" VerticalAlignment="Top" Width="266" Height="20"/>
+        <Button x:Name="ResetPassword" Content=" Change&#xD;&#xA;Password" HorizontalAlignment="Left" Margin="330,160,0,0" VerticalAlignment="Top" Width="100" Height="54" Click="ResetPassword_Click" />
+        <Button x:Name="ExitTool" Content="Exit" HorizontalAlignment="Left" Margin="454,160,0,0" VerticalAlignment="Top" Width="100" Height="54" Click="ExitTool_Click" RenderTransformOrigin="0.449,-0.527" />
+        <Label Content="Your Password must meet the following requirements:&#xA;1.  Minimum 8 characters&#xA;2.  Contain at least 1 Upper Case, Lower Case and  Special Character&#xA;3 . Must be different from the last 6 last used passwords." HorizontalAlignment="Left" Margin="29,235,0,0" VerticalAlignment="Top" />
+        <Image HorizontalAlignment="Left" Height="18
+               " Margin="277,59,0,0" VerticalAlignment="Top" Width="17" Source="show hide password.png" Stretch="Fill" MouseLeave="imgLeaveHideCurrent" PreviewMouseDown="imgDownShowCurrent" PreviewMouseUp="imgUpHideCurrent"/>
+        <Image HorizontalAlignment="Left" Height="18" Margin="277,127,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.471,0.5" Source="show hide password.png" Stretch="Fill" PreviewMouseUp="imgUpHideNew" PreviewMouseDown="imgDownShowNew" MouseLeave="imgLeaveHideNew"/>
+        <Image HorizontalAlignment="Left" Height="18" Margin="277,195,0,0" VerticalAlignment="Top" Width="17" Stretch="Fill" Source="show hide password.png" MouseLeave="imgLeaveHideVerify" PreviewMouseDown="imgDownShowVerify" PreviewMouseUp="imgUpHideVerify"/>
+
+    </Grid>
+</Window>
